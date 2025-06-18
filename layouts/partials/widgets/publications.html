@@ -1,44 +1,125 @@
+
+
 {{/* Portfolio Widget */}}
 
 {{/* Initialise */}}
 {{ $ := .root }}
 {{ $st := .page }}
+{{ $items_type := $st.Params.content.page_type | default "post" }}
+{{ $items_sort := $st.Params.content.order | default "asc" }}
+{{ $items_count := $st.Params.content.count | default 65535 }}
 
 
-{{/*<div ></div>
-<div class="col-12  col-lg-4 section-heading">
-    {{ with $st.Params.title }}<h1>{{ . }}</h1>{{ end }}
-  <p>Some of my projects, enjoy!</p>
-</div>*/}}
-<div class="col-12  col-lg-8  home-pubs-section">
 
-  {{ range $st.Params.pubs_list }}
-  <div class="media stream-item view-compact" style="align-items: stretch;">
-    <div class="media-body">
+{{/* Require Isotope */}}
+{{ $.Page.Store.Set "has_isotope" true }}
 
 
-      <div>
-        <span class="pub-author">{{ .authors  | markdownify | emojify }}</span>.
-        <span class="pub-title">{{ .title  | markdownify | emojify }}</span>.
-        {{ with .journal }}<span class="pub-journal">{{ . | markdownify | emojify }}</span> {{ end }}
-      </div>
-        {{with .links}}
-          <div class="btn-links">
-              {{ range $idx, $item := . }}
-                <a class="btn btn-outline-primary btn-page-header btn-sm"
-                   href="{{ $item.url }}">
-                    {{ $item.name  | markdownify | emojify }}
-                </a>
-              {{end}}
-          </div>
-        {{end}}
 
-    </div>
-   {{/* <div class="ml-3 home-prj-img-icon-wrap">
-        {{ with .image }} <img src="{{ . }}" class="home-project-icon-image" loading="lazy" /> {{ end }}
-    </div>*/}}
+{{/* Query */}}
+{{ $query := where (where site.RegularPages "Type" $items_type) "Params.featured" true }}
+
+
+
+{{ $count := len $query }}
+
+{{/* Sort */}}
+{{ $sort_by := ".Params.weight" }}
+{{ $query = sort $query $sort_by $items_sort }}
+
+
+{{/*{{ $test1 := index $query 0 }}*/}}
+{{/*{{ $test1.Path }}*/}}
+{{/*{{ $test1.Date }}*/}}
+{{/*{{ $test1.Title }}*/}}
+{{/****  {{ $test1.Section }}---*/}}
+{{/****  {{ $test1.Parent.Path | relLangURL }}---*/}}
+{{/****  {{ "/pub" | relLangURL }}---*/}}
+
+
+
+{{/* Limit */}}
+{{ $query = first $items_count $query }}
+
+
+{{/* Array of distinct years. */}}
+{{ range $query.ByDate.Reverse }}
+    {{ $year := print (.Date.Format "2006") }}
+    {{ $.Store.SetInMap "years" $year $year }}
+{{ end }}
+
+
+<div>
+
+  <div class="col-auto">
+    <select class="pub-filters form-control form-control-sm" data-filter-group="year">
+      <option value="*">{{ i18n "date" }}</option>
+        {{ $years_sorted := $.Store.GetSortedMapValues "years" }}
+        {{ if $years_sorted }}
+            {{ range $year := sort $years_sorted "" "desc" }}
+              <option value=".year-{{ $year }}">
+                  {{ $year }}
+              </option>
+            {{ end }}
+        {{ end }}
+    </select>
   </div>
-  {{ end }}
+
+  <div class=" container home-pubs-section" id="container-publications">
 
 
+      {{ range $query }}
+
+          {{ $pub_item := .Params }}
+
+          {{/*logical path: Returns the logical path of the given page.*/}}
+          {{/*{{ $page_folder := .Path }}*/}}
+          {{/*去掉最前面的 / */}}
+          {{ $page_folder := substr .Path 1 }}
+
+
+          {{/*<div class="media stream-item view-compact">
+            <div class="media-body">
+            </div>
+          </div>*/}}
+        <div class="row pub-item grid-sizer year-{{ $pub_item.Date.Format "2006" }}" style="margin: 0">
+          <div class="col-12 col-md-2">
+
+              {{ if eq $pub_item.media_icon.type "video" }}
+                <video autoplay="" loop="" muted="">
+                  <source src="{{ add $page_folder "/" $pub_item.media_icon.src | relLangURL }}" type="video/mp4">
+                </video>
+              {{ else }}
+                <img src="{{ add $page_folder "/" $pub_item.media_icon.src | relLangURL }}"/>
+              {{ end }}
+
+          </div>
+          <div class="col-12 col-md-10">
+            <div>
+              <div><span class="pub-title">{{ $pub_item.title | markdownify | emojify }}</span></div>
+              <div><span class="pub-author">{{ $pub_item.authors_text | markdownify | emojify }}</span></div>
+                {{ with $pub_item.journal }}
+                  <div><span class="pub-journal">{{ . | markdownify | emojify }}</span></div> {{ end }}
+            </div>
+              {{ with $pub_item.links }}
+                <div class="btn-links">
+                    {{ range $idx, $item := . }}
+                      <a class="btn btn-outline-primary btn-page-header btn-sm"
+                         href="{{ $item.url }}">
+                          {{ $item.name | markdownify | emojify }}
+                      </a>
+                    {{ end }}
+                </div>
+              {{ end }}
+          </div>
+        </div>
+
+
+
+
+
+      {{ end }}
+
+
+  </div>
 </div>

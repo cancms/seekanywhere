@@ -2,6 +2,7 @@
 {{- $language_code := site.LanguageCode | default "en-us" -}}
 <html lang="{{$language_code}}" {{ if in site.Data.i18n.rtl.rtl $language_code }}dir="rtl"{{end}}>
 
+
 {{ partial "site_head" . }}
 
 {{ $show_navbar := ((site.Params.header.navbar.enable | default true) | and (ne .Params.header.navbar.enable false)) | or .Params.header.navbar.enable }}
@@ -10,7 +11,7 @@
       data-spy="scroll"
       {{ if $show_navbar }}data-offset="70"{{end}}
       data-target="{{ if or .IsHome (eq .Type "widget_page") | and $highlight_active_link }}#navbar-main{{else}}#TableOfContents{{end}}"
-      class="page-wrapper container {{with .Params.design.css_class}}{{.}}{{end}}
+      class="page-wrapper  {{with .Params.design.css_class}}{{.}}{{end}}
               {{ if not (.Scratch.Get "light") }}dark{{end}}
               {{ if not $show_navbar }}no-navbar{{end}}"
       {{with .File}}data-wc-page-id="{{.UniqueID}}"{{end}}
@@ -43,7 +44,7 @@
     {{ partial "navbar" . }}
   </div>
 
-  <div class="page-body">
+  <div class="page-body container">
     {{/* Breadcrumb */}}
     {{/* Don't apply to Book layout as that has different breadcrumb placement. */}}
     {{ if .Params.show_breadcrumb | and (ne .Type "book") }}

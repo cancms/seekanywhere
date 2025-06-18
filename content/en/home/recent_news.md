@@ -1,7 +1,9 @@
 ---
-# An instance of the Pages widget.
+# An instance of the Featured widget.
 # Documentation: https://wowchemy.com/docs/page-builder/
-widget: blank
+widget: featured
+
+active: true
 
 # This file represents a page section.
 headless: true
@@ -9,30 +11,34 @@ headless: true
 # Order that this section appears on the page.
 weight: 20
 
-title: Recent News
-subtitle:
-ex_link: '/news'  
-ex_link_title: 'All news»'  
+title: News
+subtitle: ""
 
+content:
+  # Page type to display. E.g. post, talk, publication...
+  page_type: news
+  # Choose how many pages you would like to display (0 = all pages)
+  count: 0
+  # Filter on criteria
+  filters:
+    author: ""
+    category: ""
+    publication_type: ""
+    tag: ""
+  # Page order: descending (desc) or ascending (asc) date.
+  order: desc
+
+  archive:
+    text: Show more
+    enable: true
 
 design:
   # Choose a view for the listings:
-  view: compact
-  columns: '2'
+  #   1 = List
+  #   2 = Compact
+  #   3 = Card
+  #   4 = Citation (publication only)
+  view: "news"
+  
+  columns: 1
 ---
-
-* One paper has been accepted by CVPRW 2025.
-
-* One paper has been accepted by ICASSP 2025.
-
-* One paper has been accepted by NeurIPS 2024.
-
-* One paper was published in Neurocomputing 2024.
-
-* One paper has been accepted by ACM MM 2023.
-
-* One paper was published in IEEE TMI 2023.
-
-* One paper has been accepted by ICASSP 2023.
-
-* One paper was published in IEEE TPAMI 2023.

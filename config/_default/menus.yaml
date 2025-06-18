@@ -8,29 +8,31 @@ main:
     url: '#about'
     weight: 10
 
-  - name: News
-    url: '#recent_news'
+  - name: Bio
+    url: '#about'
     weight: 20
 
-  - name: Experience
-    url: '#experience'
+  - name: News
+    url: '#recent_news'
     weight: 30
+
+
 
   - name: Publications
     url: '#publications'
     weight: 40
 
-  - name: Projects
-    url: '#project'
+  - name: Summary
+    url: '#summary'
     weight: 50
 
-  - name: Awards
-    url: '#awards'
-    weight: 60
-
-  - name: Service
-    url: '#service'
-    weight: 70
+#  - name: Awards
+#    url: '#awards'
+#    weight: 60
+#
+#  - name: Service
+#    url: '#service'
+#    weight: 70
 
 
 

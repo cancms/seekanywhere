@@ -1,9 +1,95 @@
 // Override this file to add your own SCSS styling.
+@font-face {
+  font-family: "Optima";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Optima"), url("../font/OPTIMA.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Optima Italic";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Optima Italic"), url("../font/Optima_Italic.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Optima Medium";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Optima Medium"), url("../font/Optima-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Optima Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Optima Bold"), url("../font/OPTIMA_B.woff") format("woff");
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  100% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+}
+
+html, body {
+  font-family: "Optima";
+  color: #000000;
+  /* background-color: #f8f7debd; */
+  //font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // 宽屏 .container 宽度
 @media (min-width: 1200px) {
   .container-xl, .container-lg, .container-md, .container-sm, .container {
     max-width: 1100px;
+    padding: 0;
   }
 }
 
@@ -15,6 +101,11 @@
   /* background-color: #f8f7debd; */
   box-shadow: 0px 0px 1.2rem #999;
   border-radius: 1rem;
+}
+
+
+.page-content-wrap {
+  padding: 0;
 }
 
 
@@ -31,8 +122,23 @@
 
 }
 
-#navbar-main .main-menu-item ul li .nav-link {
-  color: #ffffff;
+// pc
+#navbar-main .main-menu-item.collapse ul {
+
+  li {
+    margin: 0 0 0 1.5rem;
+    .nav-link {
+      color: #ffffff;
+      font-family: "Optima Medium";
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  }
+
+}
+// 手机
+#navbar-main .main-menu-item.show ul li .nav-link {
+  color: #000000;
 }
 
 .dark a, .dark h3.article-title a:hover {
@@ -40,30 +146,107 @@
   color: #1565c0;
 }
 
-.experience-icon-image {
-  width: 80px;
-  max-height: 80px;
-  max-width: unset;
+
+.profile-avatar {
+  .profile-bio {
+    padding-left: 1rem;
+  }
+  .avatar-square {
+    border-radius: 1.3rem;
+    width: 200px;
+    height: 200px;
+  }
+
+  .big-icon {
+    font-size: 1.6rem;
+  }
+
+  .network-img-icon {
+    width: 1.6rem;
+  }
+  .net-icon-link {
+    .animate-icon {
+      color: black;
+    }
+  }
+
+  .email-link {
+    padding: 1rem 0;
+    a {
+      font-family: "Optima Bold";
+      font-size: 1.3rem;
+      color: #000080;
+    }
+  }
+
+  .animate-icon:hover, .email-link:hover {
+    animation: shake 0.5s;
+    animation-iteration-count: infinite;
+    color: #1565c0;
+  }
+
+  .portrait-title h2 {
+    font-family: "Optima Bold";
+    font-size: 2.25rem;
+    font-weight: bold;
+  }
+  .role-text {
+    font-family: "Optima Medium";
+    color: black;
+    font-size: 1.15rem;
+  }
+
 }
 
-.home-prj-img-icon-wrap {
-  /*display: grid;
-  place-items: center;*/
 
-  .home-project-icon-image {
-    /*max-width: 150px !important;*/
-    margin-top: 0.5rem;
 
+.home-section {
+  padding: 2rem 0;
+  h1 {
+    font-size: 2rem;
+    font-family: "Optima Bold";
+    font-weight: bold;
+    color: black;
+    padding: 2rem 0 1rem 0 ;
   }
 }
+.home-section:nth-of-type(even) {
+  //background: #f7f7f7;
+  background: unset;
+}
 
 
+
+#recent_news {
+  .media.stream-item:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+}
 
 .home-pubs-section {
   .pub-title {
     font-weight: bold;
   }
+  .pub-item {
+    padding: 0.5rem 0;
+    video, img {
+      width: 100%;
+    }
+  }
+
+
+  video {
+    //height: 8rem;
+    //width: 11rem;
+    //height: 8rem;
+    //background-color: #999;
+    //padding: 0.5rem;
+  }
 }
+
+
+
+
 
 
 

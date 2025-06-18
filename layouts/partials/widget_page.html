@@ -104,7 +104,8 @@
   {{ $widget_args := dict "root" $ "page" $st "hash_id" $hash_id }}
   {{ $css_classes := $st.Params.design.css_class | default $st.Params.advanced.css_class | default "" }}
   {{ $extra_attributes := "" }}
-  {{ $use_container := true }}
+
+  {{ $use_container := false }}
 
   {{/* Special case: Slider widget. */}}
   {{ if in (slice "slider") $widget }}
