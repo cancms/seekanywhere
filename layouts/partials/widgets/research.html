@@ -1,0 +1,81 @@
+{{ $ := .root }}
+{{ $page := .page }}
+
+<div class="col-12   home-research-section">
+
+  <div class="research-summary">
+    {{ $page.Content }}
+  </div>
+  <div class=" ">
+    <a href="/seekanywhere/news/">
+      [Show the research progress]
+    </a>
+  </div>
+
+  <ul class="nav nav-pills">
+    {{ range  $key, $value := $page.Params.research_step_names }}
+    <li class="nav-item">
+      <span class="nav-link"  >{{$value}}</span>
+    </li>
+    {{ end }}
+  </ul>
+
+  <div class="research-papers ">
+    {{ range  $step, $paper_items := $page.Params.research_step_papers }}
+    <div class="research-step {{$step}} container">
+      {{ range  $p_index, $paper := $paper_items }}
+      <div class="research-step-item row">
+        <div class="col-12 col-md-1" ><img class="lead-img" src="{{ $paper.image | relLangURL }}" /></div>
+        <div class="col-12 col-md-11" >
+          <div>
+            <div><span class="pub-title">{{ $paper.title | markdownify | emojify }}</span></div>
+            <div><span class="pub-author">{{ $paper.authors_text | markdownify | emojify }}</span></div>
+            {{ with $paper.journal }}
+            <div><strong class="pub-journal">{{ . | markdownify | emojify }}</strong></div>
+            {{ end }}
+          </div>
+          {{ with $paper.links }}
+          <div class="btn-links">
+            {{ range $idx, $item := . }}
+            <a class="btn btn-outline-primary btn-page-header btn-sm"
+               href="{{ $item.url }}">
+              {{ $item.name | markdownify | emojify }}
+            </a>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+      </div>
+      {{ end }}
+    </div>
+    {{ end }}
+  </div>
+</div>
+<script>
+  // const stepPages = ['step1', 'step2', 'step3'];
+  const stepPages = [];
+  {{ range  $key, $value := $page.Params.research_step_names }}
+  stepPages.push('{{$value}}');
+  {{ end }}
+
+
+
+  function clickShowPaper() {
+
+    $('.home-research-section .nav-item .nav-link').click((event) => {
+
+      console.log(event)
+      // $('.home-research-section .nav-item .nav-link').removeClass('active');
+      $(this).addClass('active');
+
+    });
+
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    clickShowPaper();
+  });
+
+
+
+</script>

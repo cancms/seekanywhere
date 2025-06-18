@@ -225,8 +225,23 @@ html, body {
 
 .home-pubs-section {
   .pub-title {
+    font-size: 1rem;
+    font-family: "Optima Bold";
     font-weight: bold;
   }
+
+  .pub-author {
+    font-size: 1rem;
+    font-family: "Optima Medium";
+  }
+
+  .pub-journal {
+    font-style: italic;
+    font-family: "Optima Bold";
+    color: #a52a2a;
+    font-weight: bold;
+  }
+
   .pub-item {
     padding: 0.5rem 0;
     video, img {
@@ -242,6 +257,51 @@ html, body {
     //background-color: #999;
     //padding: 0.5rem;
   }
+
+  .toggle-links-content{
+    position: relative;
+    .toggle-content {
+      border: 1px solid lightgray;
+      padding: 1rem;
+      width: 90%;
+
+      pre {
+        font-size: 0.8rem;
+        color: #000000;
+      }
+    }
+  }
+
+}
+
+.home-research-section {
+  .pub-title {
+    font-size: 1rem;
+    font-family: "Optima Bold";
+    font-weight: bold;
+  }
+
+  .pub-author {
+    font-size: 1rem;
+    font-family: "Optima Medium";
+  }
+
+  .pub-journal {
+    font-style: italic;
+    font-family: "Optima Bold";
+    color: #a52a2a;
+    font-weight: bold;
+  }
+
+  .research-step-item {
+    padding: 0.5rem 0;
+    video, img {
+      width: 100%;
+      padding: 0.4rem 0 0 0;
+    }
+  }
+
+
 }
 
 
@@ -251,5 +311,7 @@ html, body {
 
 
 @media (max-width: 640px) {
+
+
 
 }

@@ -1,6 +1,6 @@
 ---
 title: "ETCH2: Generalizing Body Fitting to Clothed Humans via Equivariant Tightness"
-authors_text: "Boqian Li, Haiwen Feng, Zeyu Cai, Michael J. Black, **Yuliang Xiu**"
+authors_text: "[Boqian Li](https://boqian-li.github.io/), Haiwen Feng, Zeyu Cai, Michael J. Black, <u>Yuliang Xiu</u>"
 journal: "arXiv 2025"
 date: 2025-01-01
 intro: "Fitting SMPL to clothed humans using Equivariant Tightness Vector and Aggregated Sparse Markers"
