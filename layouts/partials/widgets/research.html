@@ -7,22 +7,35 @@
     {{ $page.Content }}
   </div>
   <div class=" ">
-    <a href="/seekanywhere/news/">
+    <a href="javascript: toggleShowProgress(); ">
       [Show the research progress]
     </a>
   </div>
 
-  <ul class="nav nav-pills">
-    {{ range  $key, $value := $page.Params.research_step_names }}
-    <li class="nav-item">
-      <span class="nav-link"  >{{$value}}</span>
-    </li>
-    {{ end }}
-  </ul>
 
-  <div class="research-papers ">
+
+  <div class="research-papers  d-none">
+
+    <ul class="nav nav-pills">
+        {{ $progress_index := 0 }}
+        {{ range  $key, $value := $page.Params.research_step_names }}
+            {{ $progress_index = add  1 $progress_index }}
+          <li class="nav-item">
+            <div class="nav-link {{ if eq $progress_index 1 }} active {{ end }}  "
+                 data-step="{{ $key }}"
+            >
+                {{$value}}
+            </div>
+          </li>
+        {{ end }}
+    </ul>
+
+
+      {{ $step_index := 0 }}
     {{ range  $step, $paper_items := $page.Params.research_step_papers }}
-    <div class="research-step {{$step}} container">
+        {{ $step_index = add  1 $step_index }}
+
+    <div class="research-step {{$step}} container {{ if ne $step_index 1 }} d-none {{ end }} "  >
       {{ range  $p_index, $paper := $paper_items }}
       <div class="research-step-item row">
         <div class="col-12 col-md-1" ><img class="lead-img" src="{{ $paper.image | relLangURL }}" /></div>
@@ -52,24 +65,54 @@
   </div>
 </div>
 <script>
+  // let showProgress = false;
+
+  // steps
   // const stepPages = ['step1', 'step2', 'step3'];
   const stepPages = [];
   {{ range  $key, $value := $page.Params.research_step_names }}
   stepPages.push('{{$value}}');
   {{ end }}
 
+  // active step
+  let activeStep = stepPages[0];
 
+
+
+  function toggleShowProgress() {
+    const progressElement = $(`.home-research-section .research-papers`);
+    if(progressElement) {
+      if (progressElement.hasClass('d-none')) {
+        progressElement.removeClass('d-none');
+      } else {
+        progressElement.addClass('d-none');
+      }
+    }
+    return false;
+  }
 
   function clickShowPaper() {
 
-    $('.home-research-section .nav-item .nav-link').click((event) => {
+    function onStepChange() {
+      $(`.home-research-section .research-papers .research-step`).addClass('d-none');
+      $(`.home-research-section .research-papers .${activeStep}`).removeClass('d-none');
+    }
 
-      console.log(event)
-      // $('.home-research-section .nav-item .nav-link').removeClass('active');
-      $(this).addClass('active');
 
-    });
+    function highlightTab() {
+      $('.home-research-section .nav-item .nav-link').click((event) => {
+        const thisElement = event.currentTarget;
+        // console.log(event)
+        $('.home-research-section .nav-item .nav-link').removeClass('active');
+        $(thisElement).addClass('active');
 
+        activeStep = $(thisElement).data('step');
+        onStepChange();
+      });
+    }
+
+
+    highlightTab();
   }
 
   document.addEventListener('DOMContentLoaded', () => {
