@@ -122,6 +122,14 @@ html, body {
 
 }
 
+.navbar-light .navbar-brand {
+  font-family: "Optima Bold";
+  font-weight: bold;
+  color: #004990;
+  font-size: 1.5rem;
+}
+
+
 // pc
 #navbar-main .main-menu-item.collapse ul {
 
@@ -343,6 +351,15 @@ html, body {
 
 @media (max-width: 640px) {
 
+  .header--fixed {
+    .container {
+      padding-left: 0 ;
+      padding-right: 0 ;
+    }
+  }
 
+  .page-body {
+    padding: 1.4rem 1.8rem;
+  }
 
 }
